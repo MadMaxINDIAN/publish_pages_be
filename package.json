@@ -1,0 +1,33 @@
+{
+  "name": "publish_pages_be",
+  "version": "1.0.0",
+  "description": "NodeJS backend code for publish pages application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MadMaxINDIAN/publish_pages_be.git"
+  },
+  "keywords": [
+    "book",
+    "read",
+    "summary",
+    "naman",
+    "khater",
+    "madmaxindian"
+  ],
+  "author": "Naman Khater",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MadMaxINDIAN/publish_pages_be/issues"
+  },
+  "homepage": "https://github.com/MadMaxINDIAN/publish_pages_be#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  }
+}
