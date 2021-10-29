@@ -23,6 +23,14 @@ app.use((req, res, next) => {
 // MORGAN SETUP
 app.use(morgan('combined'))
 
+// ROUTES FILES
+const chapterRoutes = require("./routes/chapter");
+const bookRoutes = require("./routes/chapter");
+
+// APP ROUTES
+app.use("/chapter", chapterRoutes);
+app.use("/book", bookRoutes);
+
 app.get("/", (req, res) => {
     console.log("Hello world");
     return res.send("Hello")
