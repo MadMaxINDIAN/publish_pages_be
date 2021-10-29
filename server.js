@@ -25,6 +25,7 @@ app.use(morgan('combined'))
 
 app.get("/", (req, res) => {
     console.log("Hello world");
+    return res.send("Hello")
 })
 
 const port = process.env.PORT;
