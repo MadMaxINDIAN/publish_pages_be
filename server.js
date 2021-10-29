@@ -25,7 +25,7 @@ app.use(morgan('combined'))
 
 // ROUTES FILES
 const chapterRoutes = require("./routes/chapter");
-const bookRoutes = require("./routes/chapter");
+const bookRoutes = require("./routes/books");
 
 // APP ROUTES
 app.use("/chapter", chapterRoutes);
