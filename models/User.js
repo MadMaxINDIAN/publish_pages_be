@@ -20,17 +20,12 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    providerId: {
-        type: String,
-        required: true
-    },
     uid: {
         type: String,
         required: true
     },
     type: {
         type: String,
-        required: true,
         default: 'user'
     }
 }, {timestamps: true});
