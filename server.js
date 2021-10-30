@@ -26,10 +26,12 @@ app.use(morgan('combined'))
 // ROUTES FILES
 const chapterRoutes = require("./routes/chapter");
 const bookRoutes = require("./routes/books");
+const userRoutes = require("./routes/user");
 
 // APP ROUTES
 app.use("/chapter", chapterRoutes);
 app.use("/book", bookRoutes);
+app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
     console.log("Hello world");
