@@ -16,9 +16,10 @@ module.exports = (req, res, next) => {
     err.statusCode = 401;
     throw err;
   }
+  console.log(decodedToken);
   User.findOne({ uid: decodedToken.user_id })
     .then((user) => {
-      if (user && user.type !== "admin") {
+      if (user?.type !== "admin") {
         const err = new Error("Not authorized");
         err.statusCode = 401;
         throw err;

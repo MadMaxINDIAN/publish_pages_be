@@ -43,7 +43,6 @@ app.get("/", (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log(err, "app.js");
   const status = err.statusCode || 500;
   const message = err.message || "Internal server error. Try again later";
   const data = err.data;

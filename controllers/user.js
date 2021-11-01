@@ -100,7 +100,6 @@ exports.addAdminUser = (req, res, next) => {
           type: "admin",
           emailVerified: emailVerified,
         });
-        console.log(newUser);
         return newUser.save().then((user) => {
           return res.status(200).json({
             success: true,
@@ -126,6 +125,43 @@ exports.getAllUsers = (req, res, next) => {
         msg: "Users fetched successfully",
         users: users,
       });
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+exports.checkAdmin = (req, res, next) => {
+  console.log(req.user);
+  User.findOne({ uid: req.user.user_id })
+    .then((user) => {
+      if (user?.type !== "admin") {
+        return res
+          .status(401)
+          .json({ success: true, msg: "You are not authorized here" });
+      }
+      return res.json({ success: true });
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+exports.checkUser = (req, res, next) => {
+  User.findOne({ uid: req.user.user_id })
+    .then((user) => {
+      if (user?.type !== "user") {
+        return res
+          .status(401)
+          .json({ success: true, msg: "You are not authorized here" });
+      }
+      return res.json({ success: true });
     })
     .catch((err) => {
       if (!err.statusCode) {
