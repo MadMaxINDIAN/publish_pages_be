@@ -6,8 +6,15 @@ exports.addUser = (req, res, next) => {
   User.findOne({ email: email })
     .then((user) => {
       if (user) {
+        if (user.type === "admin") {
+          return res.status(400).json({
+            success: false,
+            msg: "Unauthorized user",
+          });
+        }
         if (providerId === "google.com") {
           user.provider = providerId;
+          user.photoURL = photoURL;
           return user.save().then((user) => {
             return res.status(200).json({
               success: true,
