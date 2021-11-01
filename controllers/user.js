@@ -15,6 +15,7 @@ exports.addUser = (req, res, next) => {
         if (providerId === "google.com") {
           user.provider = providerId;
           user.photoURL = photoURL;
+          user.uid = uid;
           return user.save().then((user) => {
             return res.status(200).json({
               success: true,
