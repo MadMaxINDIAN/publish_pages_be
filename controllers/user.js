@@ -135,6 +135,7 @@ exports.getAllUsers = (req, res, next) => {
 };
 
 exports.checkAdmin = (req, res, next) => {
+  console.log(req.user);
   User.findOne({ uid: req.user.user_id })
     .then((user) => {
       if (user?.type !== "admin") {
