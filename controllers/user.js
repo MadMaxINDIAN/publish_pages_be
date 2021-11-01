@@ -1,8 +1,15 @@
 const User = require("../models/User");
 
 exports.addUser = (req, res, next) => {
-  const { displayName, email, phoneNumber, photoURL, providerId, uid, emailVerified } =
-    req.body;
+  const {
+    displayName,
+    email,
+    phoneNumber,
+    photoURL,
+    providerId,
+    uid,
+    emailVerified,
+  } = req.body;
   User.findOne({ email: email })
     .then((user) => {
       if (user) {
@@ -48,15 +55,23 @@ exports.addUser = (req, res, next) => {
       }
     })
     .catch((err) => {
-      return res
-        .status(500)
-        .json({ success: false, msg: "Failed to register user", err });
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     });
 };
 
 exports.addAdminUser = (req, res, next) => {
-  const { displayName, email, phoneNumber, photoURL, providerId, uid, emailVerified } =
-    req.body;
+  const {
+    displayName,
+    email,
+    phoneNumber,
+    photoURL,
+    providerId,
+    uid,
+    emailVerified,
+  } = req.body;
   User.findOne({ email: email })
     .then((user) => {
       if (user) {
@@ -96,9 +111,10 @@ exports.addAdminUser = (req, res, next) => {
       }
     })
     .catch((err) => {
-      return res
-        .status(500)
-        .json({ success: false, msg: "Failed to register user", err });
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     });
 };
 
@@ -112,9 +128,9 @@ exports.getAllUsers = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log(err)
-      return res
-        .status(500)
-        .json({ success: false, msg: "Failed to fetch users", err });
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     });
-}
+};
