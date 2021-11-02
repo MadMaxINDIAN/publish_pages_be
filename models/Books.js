@@ -48,7 +48,8 @@ const BooksSchema = new Schema({
     },
     language: {
         type: String,
-        required: true
+        required: true,
+        enum: ['English', 'Hindi', 'Other']
     },
     averageRating: {
         type: Number,
@@ -57,5 +58,11 @@ const BooksSchema = new Schema({
     ratingsCount: {
         type: Number,
         required: true
+    },
+    admin_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Admin'
     }
 }, {timestamps: true});
+
+module.exports = mongoose.model('Books', BooksSchema);
