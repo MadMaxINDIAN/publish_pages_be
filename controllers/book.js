@@ -114,5 +114,27 @@ exports.updateBook = (req, res, next) => {
 };
 
 exports.deleteBook = (req, res, next) => {
-  console.log("DELETE CHAPTER");
+  const isbn = req.params.isbn;
+  Book.findOne({ isbn: isbn })
+    .then((book) => {
+      if (!book) {
+        return res.status(404).json({
+          success: true,
+          message: "Book not found",
+        });
+      }
+      return book.remove().then(() => {
+        return res.status(200).json({
+          success: true,
+          message: "Book deleted successfully",
+        });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        msg: "Internal server error. Try again later.",
+      });
+    });
 };
