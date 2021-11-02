@@ -2,12 +2,38 @@ const Book = require("../models/Books");
 const Chapter = require("../models/Chapters");
 const ImageUploader = require("../multer/upload.controller");
 
-exports.getBook = (req, res, next) => {
+exports.getBooks = (req, res, next) => {
   Book.find()
     .then((books) => {
       return res.json({
+        success: true,
         msg: "Books fetched successfully",
         books,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        msg: "Internal server error. Try again later.",
+      });
+    });
+};
+
+exports.getBook = (req, res, next) => {
+  const isbn = req.params.isbn;
+  Book.findOne({ isbn: isbn })
+    .then((book) => {
+      if (!book) {
+        return res.status(404).json({
+          success: true,
+          message: "Book not found",
+        });
+      }
+      return res.json({
+        success: true,
+        msg: "Book fetched successfully",
+        book,
       });
     })
     .catch((err) => {
