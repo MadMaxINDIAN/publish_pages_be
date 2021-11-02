@@ -3,7 +3,18 @@ const Chapter = require('../models/Chapters');
 const ImageUploader = require('../multer/upload.controller');
 
 exports.getBook = (req, res, next) => {
-    console.log("GET CHAPTER");
+    Book.find().then(books => {
+        return res.json({
+            msg: "Books fetched successfully",
+            books
+        })
+    }).catch(err => {
+        console.log(err);
+        return res.status(500).json({
+            success: false,
+            msg: "Internal server error. Try again later."
+        })
+    })
 }
 
 exports.createBook = (req, res, next) => {
