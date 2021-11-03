@@ -124,9 +124,11 @@ exports.deleteBook = (req, res, next) => {
         });
       }
       return book.remove().then(() => {
-        return res.status(200).json({
-          success: true,
-          message: "Book deleted successfully",
+        return Chapter.deleteMany({ book: book._id }).then(() => {
+          return res.status(200).json({
+            success: true,
+            message: "Book deleted successfully",
+          });
         });
       });
     })
