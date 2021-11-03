@@ -25,13 +25,6 @@ exports.createBook = (req, res, next) => {
         });
     }
 
-    const regex = /^(?:ISBN(?:-13)?:?\ )?(?=[0-9]{13}$|(?=(?:[0-9]+[-\ ]){4})[-\ 0-9]{17}$)97[89][-\ ]?[0-9]{1,5}[-\ ]?[0-9]+[-\ ]?[0-9]+[-\ ]?[0-9]$/;
-    if (!regex.test(isbn)) {
-        return res.status(400).json({
-            message: "Invalid ISBN"
-        });
-    }
-
     // Validate request
     Book.findOne({ isbn: isbn })
     .then(book => {
