@@ -9,23 +9,16 @@ exports.getChapters = (req, res, next) => {
 		});
 	}
 	Book.findById(bookId)
+		.populate("chapters")
 		.then((book) => {
 			if (!book) {
 				return res.status(404).json({
 					message: "Book not found!",
 				});
 			}
-			return Chapter.find({ book: bookId }).then((chapters) => {
-				if (chapters.length === 0) {
-					return res.status(404).json({
-						message: "No chapters found!",
-					});
-				}
-
-				return res.status(200).json({
-					message: "Chapters fetched successfully!",
-					chapters: chapters,
-				});
+			return res.status(200).json({
+				message: "Chapters found!",
+				book: book,
 			});
 		})
 		.catch((err) => {
