@@ -1,10 +1,19 @@
-const express = require('express');
-const { getChapter, createChapter, updateChapter, deleteChapter } = require('../controllers/chapter');
+const express = require("express");
+const ImageUploader = require("../multer/upload.controller");
+
+const {
+  getChapters,
+  getChapter,
+  createChapter,
+  updateChapter,
+  deleteChapter,
+} = require("../controllers/chapter");
 const router = express.Router();
 
-router.get("/", getChapter);
-router.post("/", createChapter);
+router.get("/:bookId", getChapters);
+router.get("/get/:id", getChapter);
+router.post("/:bookId", ImageUploader.single("image"), createChapter);
 router.patch("/", updateChapter);
-router.delete("/", deleteChapter);
+router.delete("/:id", deleteChapter);
 
 module.exports = router;
