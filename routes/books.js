@@ -13,7 +13,7 @@ const ImageUploader = require("../multer/upload.controller");
 router.get("/", getBooks);
 router.get("/:isbn", getBook);
 router.post("/", ImageUploader.single("frontCoverImage"), createBook);
-router.patch("/", updateBook);
+router.patch("/:isbn", ImageUploader.single("frontCoverImage"), updateBook);
 router.delete("/:isbn", deleteBook);
 
 module.exports = router;
