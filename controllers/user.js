@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 exports.addUser = (req, res, next) => {
   const {
@@ -135,8 +136,20 @@ exports.getAllUsers = (req, res, next) => {
 };
 
 exports.checkAdmin = (req, res, next) => {
-  console.log(req.user);
-  User.findOne({ uid: req.user.user_id })
+  const token = req.get("Authorization");
+  let decodedToken;
+  try {
+    decodedToken = jwt.decode(token);
+  } catch (err) {
+    err.statusCode = 500;
+    throw err;
+  }
+  if (!decodedToken) {
+    const err = new Error("Unauthorized");
+    err.statusCode = 401;
+    throw err;
+  }
+  User.findOne({ uid: decodedToken.user_id })
     .then((user) => {
       if (user?.type !== "admin") {
         return res
@@ -154,13 +167,27 @@ exports.checkAdmin = (req, res, next) => {
 };
 
 exports.checkUser = (req, res, next) => {
-  User.findOne({ uid: req.user.user_id })
+  const token = req.get("Authorization");
+  let decodedToken;
+  try {
+    decodedToken = jwt.decode(token);
+  } catch (err) {
+    err.statusCode = 500;
+    throw err;
+  }
+  if (!decodedToken) {
+    const err = new Error("Unauthorized");
+    err.statusCode = 401;
+    throw err;
+  }
+  User.findOne({ uid: decodedToken.user_id })
     .then((user) => {
       if (user?.type !== "user") {
         return res
           .status(401)
           .json({ success: true, msg: "You are not authorized here" });
       }
+      console.log(user);
       return res.json({ success: true });
     })
     .catch((err) => {

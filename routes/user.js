@@ -14,8 +14,8 @@ const userAuth = require("../middleware/userAuth");
 // Register Different User
 router.post("/register", addUser);
 router.post("/admin/register", adminAuth, addAdminUser);
-router.post("/a", adminAuth, checkAdmin);
-router.post("/u", userAuth, checkUser);
+router.post("/a", checkAdmin);
+router.post("/u", checkUser);
 
 // Get all users for admin panel
 router.get("/admin/users", adminAuth, getAllUsers);
