@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const constants = require('../constants');
 
 const BooksSchema = new Schema({
     title: {
@@ -44,12 +45,12 @@ const BooksSchema = new Schema({
     categories: {
         type: [String],
         required: true,
-        enum: ['Fiction', 'Non-Fiction', 'Children', 'Cooking', 'History', 'Biography', 'Poetry', 'Science', 'Art', 'Religion', 'Travel', 'Other']
+        enum: constants.categories
     },
     language: {
         type: String,
         required: true,
-        enum: ['English', 'Hindi', 'Other']
+        enum: constants.languages
     },
     averageRating: {
         type: Number,
