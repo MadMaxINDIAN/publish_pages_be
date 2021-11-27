@@ -1,69 +1,74 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const constants = require('../constants');
+const constants = require("../constants");
 
-const BooksSchema = new Schema({
+const BooksSchema = new Schema(
+  {
     title: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     author: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     description: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     frontCoverImage: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     backCoverImage: {
-        type: String,
+      type: String,
     },
-    chapters: [{
+    chapters: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'Chapters'
-    }],
+        ref: "Chapters",
+      },
+    ],
     isbn: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     publisher: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
-    publishedDate: {
-        type: String,
-        required: true
+    publishedYear: {
+      type: String,
+      required: true,
     },
     pageCount: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     categories: {
-        type: [String],
-        required: true,
-        enum: constants.categories
+      type: [String],
+      required: true,
+      enum: constants.categories,
     },
     language: {
-        type: String,
-        required: true,
-        enum: constants.languages
+      type: String,
+      required: true,
+      enum: constants.languages,
     },
     averageRating: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     ratingsCount: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     admin_id: {
-        type: Schema.Types.ObjectId,
-        ref: 'Admin'
-    }
-}, {timestamps: true});
+      type: Schema.Types.ObjectId,
+      ref: "Admin",
+    },
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('Books', BooksSchema);
+module.exports = mongoose.model("Books", BooksSchema);

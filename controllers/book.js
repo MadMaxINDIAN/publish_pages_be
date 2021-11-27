@@ -52,16 +52,18 @@ exports.createBook = (req, res, next) => {
     description,
     isbn,
     publisher,
-    publishedDate,
+    publishedYear,
     pageCount,
     categories,
     language,
   } = req.body;
+  console.log(req.body);
   if (!req?.file?.location) {
     return res.status(400).json({
       message: "No image found",
     });
   }
+  const categoriesArray = categories.split(",");
 
   // Validate request
   Book.findOne({ isbn: isbn })
@@ -77,9 +79,9 @@ exports.createBook = (req, res, next) => {
           description: description,
           isbn: isbn,
           publisher: publisher,
-          publishedDate: publishedDate,
+          publishedYear: publishedYear,
           pageCount: pageCount,
-          categories: categories,
+          categories: categoriesArray,
           language: language,
           averageRating: 0,
           ratingsCount: 0,
