@@ -23,6 +23,6 @@ const ChaptersSchema = new Schema({
     required: true,
     immutable: true,
   },
-});
+}, {timestamps: true});
 
 module.exports = mongoose.model("Chapters", ChaptersSchema);
