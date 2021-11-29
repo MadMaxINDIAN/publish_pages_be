@@ -123,6 +123,7 @@ exports.updateBook = (req, res, next) => {
     categories,
     language,
   } = req.body;
+  console.log(req.body);
   Book.findOne({ isbn: isbn })
     .then((book) => {
       if (!book) {
