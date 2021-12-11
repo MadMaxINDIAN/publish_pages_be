@@ -13,7 +13,7 @@ const router = express.Router();
 router.get("/:bookId", getChapters);
 router.get("/get/:id", getChapter);
 router.post("/:bookId", ImageUploader.single("image"), createChapter);
-router.patch("/:id", updateChapter);
+router.post("/u/:id", updateChapter);
 router.delete("/:id", deleteChapter);
 
 module.exports = router;
